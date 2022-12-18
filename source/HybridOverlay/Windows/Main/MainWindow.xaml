@@ -1,0 +1,16 @@
+﻿<Window x:Class="HybridOverlay.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        mc:Ignorable="d" Name="w1"
+        WindowStyle="None" AllowsTransparency="True" Topmost="True"
+        Title="{Binding WindowTitle,FallbackValue=Title}" 
+        Width="{Binding WindowWidth,FallbackValue=600}" 
+        Height="{Binding WindowHeight, FallbackValue=400}" >
+
+    <Grid>
+        <wv2:WebView2 Name="webView" Source="{Binding SourceUrl}" />
+    </Grid>
+</Window>

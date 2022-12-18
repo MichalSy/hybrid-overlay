@@ -1,0 +1,7 @@
+﻿{
+  "Title": "WebSearch",
+  "Width": 800,
+  "Height": 500,
+  "CanClose": true,
+  "SourceUrl": "https://google.com"
+}
