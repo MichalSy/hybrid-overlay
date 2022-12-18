@@ -21,11 +21,8 @@ jobs:
     - name: Publish .NET Core Project
       run: dotnet publish source/HybridOverlay/HybridOverlay.csproj -c Release -o release --runtime win-x64 --nologo -p:PublishSingleFile=true --self-contained false
     
-    - name: Install zip
-      uses: montudor/action-zip@v1
-
     - name: create zip file
-      run: cd release && zip -r ../release.zip .
+      run: cd release && Compress-Archive -Path -DestinationPath ../release.zip
 
     - name: set version
       id: set-version
