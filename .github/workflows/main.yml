@@ -40,11 +40,11 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
 
     - name: upload binaries
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release.zip
-          asset_name: Release-${{ steps.version.outputs.version }}.zip
-          asset_content_type: application/gzip
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./release.zip
+        asset_name: Release-${{ steps.version.outputs.version }}.zip
+        asset_content_type: application/gzip
