@@ -26,7 +26,7 @@ jobs:
       run: zip -r release.zip release/*
 
     - name: version
-      run: git rev-parse --short HEAD >> $RELEASEVERSION
+      run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
     - name: create release
       uses: actions/create-release@v1
@@ -34,7 +34,7 @@ jobs:
       with:
         draft: false
         prerelease: false
-        release_name: Release-$RELEASEVERSION
+        release_name: Release-${{ steps.vars.outputs.sha_short }}
         tag_name: ${{ github.ref }}
       env:
         GITHUB_TOKEN: ${{ github.token }}
@@ -46,5 +46,5 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./release.zip
-        asset_name: Release-$RELEASEVERSION.zip
+        asset_name: Release-${{ steps.vars.outputs.sha_short }}.zip
         asset_content_type: application/gzip
