@@ -1,0 +1,41 @@
+name: Deploy to GitHub Pages
+
+# Run workflow on every push to the master branch
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    # use ubuntu-latest image to run steps on
+    runs-on: ubuntu-latest
+    steps:
+    # uses GitHub's checkout action to checkout code form the master branch
+    - uses: actions/checkout@v3
+    
+    # sets up .NET Core SDK 7.0.x
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '7.0.x'
+        
+    - name: Publish .NET Core Project
+      run: dotnet publish source/HybridOverlay/HybridOverlay.csproj -c Release -o release --nologo -p:PublishSingleFile=true --self-contained false
+    
+    - name: create zip file
+      run: zip -r release.zip release
+
+    - name: set version
+      run: echo "::set-output name=version::$(git rev-parse --short HEAD)"
+
+    - name: create release
+      uses: actions/create-release@v1
+      id: create_release
+      with:
+        draft: false
+        prerelease: false
+        release_name: Release-${{ steps.version.outputs.version }}
+        tag_name: ${{ github.ref }}
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
