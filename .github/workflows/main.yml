@@ -25,13 +25,16 @@ jobs:
     - name: create zip file
       run: zip -r release.zip release
 
+    - name: set version
+      run: echo "::set-output name=version::$(git rev-parse --short HEAD)"
+
     - name: create release
       uses: actions/create-release@v1
       id: create_release
       with:
         draft: false
         prerelease: false
-        release_name: Release ${{ github.ref }}
+        release_name: Release-${{ steps.version.outputs.version }}
         tag_name: ${{ github.ref }}
       env:
         GITHUB_TOKEN: ${{ github.token }}
