@@ -25,7 +25,7 @@ jobs:
     - name: create zip file
       run: zip -r release.zip release
 
-    - name: set version
+    - name: version
       run: echo "::set-output name=version::$(git rev-parse --short HEAD)"
 
     - name: create release
@@ -39,3 +39,12 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
+    - name: upload binaries
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./release.zip
+          asset_name: Release-${{ steps.version.outputs.version }}.zip
+          asset_content_type: application/gzip
