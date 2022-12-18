@@ -23,7 +23,7 @@ jobs:
       run: dotnet publish source/HybridOverlay/HybridOverlay.csproj -c Release -o release --nologo -p:PublishSingleFile=true --self-contained false
     
     - name: create zip file
-      run: zip -r release.zip release/*
+      run: cd release && zip -r release.zip .
 
     - name: set version
       id: set-version
