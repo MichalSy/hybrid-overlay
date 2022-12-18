@@ -47,5 +47,5 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./release.zip
-        asset_name: Release-${{ steps.set-version.outputs.sha_short }}.zip
+        asset_name: HybridOverlay-${{ steps.set-version.outputs.sha_short }}.zip
         asset_content_type: application/gzip
