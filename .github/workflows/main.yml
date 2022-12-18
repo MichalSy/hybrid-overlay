@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
     # uses GitHub's checkout action to checkout code form the master branch
     - uses: actions/checkout@v3
@@ -19,7 +19,7 @@ jobs:
         dotnet-version: '7.0.x'
         
     - name: Publish .NET Core Project
-      run: dotnet publish source/HybridOverlay/HybridOverlay.csproj -c Release -o release --runtime win-x64 --nologo -p:PublishSingleFile=true --self-contained false
+      run: dotnet publish source/HybridOverlay/HybridOverlay.csproj -c Release -o release --runtime win-x64 --nologo
     
     - name: create zip file
       run: cd release && zip -r ../release.zip .
