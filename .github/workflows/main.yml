@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
     # uses GitHub's checkout action to checkout code form the master branch
     - uses: actions/checkout@v3
@@ -22,7 +22,7 @@ jobs:
       run: dotnet publish source/HybridOverlay/HybridOverlay.csproj -c Release -o release --runtime win-x64 --nologo -p:PublishSingleFile=true --self-contained false
     
     - name: create zip file
-      run: cd release && Compress-Archive -Path . -DestinationPath ../release.zip
+      run: cd release && zip -r ../release.zip .
 
     - name: set version
       id: set-version
