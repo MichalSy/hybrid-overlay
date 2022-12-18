@@ -36,6 +36,7 @@ jobs:
         draft: false
         prerelease: false
         release_name: Release-${{ steps.set-version.outputs.sha_short }}
+        tag_name: Release-${{ steps.set-version.outputs.sha_short }}
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
