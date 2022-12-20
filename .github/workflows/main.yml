@@ -12,11 +12,10 @@ jobs:
     # uses GitHub's checkout action to checkout code form the master branch
     - uses: actions/checkout@v3
     
-    # sets up .NET Core SDK 7.0.x
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '7.0.x'
+        dotnet-version: '7.x'
         
     - name: Publish .NET Core Project
       run: dotnet publish source/HybridOverlay/HybridOverlay.csproj -c Release -o release --runtime win-x64 --nologo -p:PublishSingleFile=true --self-contained false
